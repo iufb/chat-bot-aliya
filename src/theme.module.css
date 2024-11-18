@@ -1,0 +1,6 @@
+.input {
+  &:focus-within {
+    outline: 2px solid var(--mantine-color-slate-7);
+    border-color: transparent;
+  }
+}
