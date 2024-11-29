@@ -11,10 +11,10 @@ export const EditRequestButton = ({ data }: EditRequestButtonProps) => {
 
   return (
     <>
-      <Modal opened={opened} onClose={close}>
+      <Modal size={"auto"} opened={opened} onClose={close}>
         <UpdateRequestForm data={data} />
       </Modal>
-      <Button color="slate.9" onClick={open}>
+      <Button variant="base" onClick={open}>
         <EditIcon />
       </Button>
     </>

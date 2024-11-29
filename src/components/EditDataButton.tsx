@@ -11,7 +11,7 @@ export const EditDataButton = ({ data }: EditDataButtonProps) => {
 
   return (
     <>
-      <Modal opened={opened} onClose={close}>
+      <Modal size={"auto"} opened={opened} onClose={close}>
         <UpdateDataForm data={data} />
       </Modal>
 

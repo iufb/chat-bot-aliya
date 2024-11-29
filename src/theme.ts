@@ -1,7 +1,12 @@
-import { createTheme, Input } from "@mantine/core";
+import { Button, createTheme, Input } from "@mantine/core";
 import classes from "./theme.module.css";
 export const theme = createTheme({
   components: {
+    Button: Button.extend({
+      classNames: {
+        root: classes.button,
+      },
+    }),
     Input: Input.extend({
       classNames: {
         input: classes.input,

@@ -4,3 +4,13 @@
     border-color: transparent;
   }
 }
+.button {
+  &[data-variant="base"] {
+    background-color: var(--mantine-color-slate-9);
+    color: var(--mantine-color-white);
+  }
+  &[data-variant="outline"] {
+    border: 1px solid var(--mantine-color-slate-9);
+    color: var(--mantine-color-slate-9);
+  }
+}

@@ -8,10 +8,13 @@ export type DataType = {
 export type RequestType = {
   id: number;
   name: string;
-  telehpone: string;
+  telephone: string;
   email: string;
   info: string;
 };
-
+export type LoginRequestType = {
+  username: string;
+  password: string;
+};
 export type DataDTO = Omit<DataType, "id">;
 export type RequestDTO = Omit<RequestType, "id">;

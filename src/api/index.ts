@@ -1,6 +1,7 @@
 import { getCookie } from "../utils/cookies";
 
-const backendUrl = import.meta.env.BACKENDURL;
+const backendUrl = import.meta.env.VITE_BACKENDURL;
+
 interface CRequest {
   path: string;
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "UPDATE";
@@ -8,8 +9,12 @@ interface CRequest {
   query?: URLSearchParams | Record<string, any>;
   body?: { json?: unknown; multipart?: Record<string, string | Blob> };
 }
-export const customFetch = async (params: CRequest) => {
-  const url = new URL(`/api/${params.path}`, backendUrl);
+export const customFetch = async (
+  params: CRequest,
+  withPrefix: boolean = true,
+) => {
+  const url = new URL(`${withPrefix ? "/api/" : ""}${params.path}`, backendUrl);
+
   url.search =
     params.query instanceof URLSearchParams
       ? params.query.toString()

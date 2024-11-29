@@ -4,11 +4,12 @@ import { ReactNode } from "react";
 export const FormContainer = ({ children }: { children: ReactNode }) => {
   return (
     <Flex
+      miw={"40svw"}
+      w={"100%"}
       p={20}
       direction={"column"}
       gap={10}
       maw={"80svw"}
-      mx={"auto"}
       styles={{
         root: {
           borderRadius: ".5rem",
