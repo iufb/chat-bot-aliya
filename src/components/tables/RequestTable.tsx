@@ -1,5 +1,5 @@
 import { GetAllRequest } from "@/api/requests";
-import { ErrorUI } from "@/components";
+import { ErrorUI, ShowContentModal } from "@/components";
 import { DeleteRequestButton } from "@/components/DeleteRequestButton";
 import { EditRequestButton } from "@/components/EditRequestButton";
 import { notificationErrors } from "@/utils/consts";
@@ -29,6 +29,16 @@ export const RequestTable = () => {
       <Table.Td>{element.info}</Table.Td>
       <Table.Td>{element.telephone}</Table.Td>
       <Table.Td>
+        <ShowContentModal
+          value={{
+            [tableHeaders[0]]: element.name,
+            [tableHeaders[1]]: element.email,
+            [tableHeaders[2]]: element.info,
+            [tableHeaders[3]]: element.telephone,
+          }}
+        />
+      </Table.Td>
+      <Table.Td>
         <EditRequestButton data={element} />
       </Table.Td>
       <Table.Td>
@@ -42,10 +52,11 @@ export const RequestTable = () => {
       <Table>
         <Table.Thead>
           <Table.Tr>
-            <Table.Th>ФИО</Table.Th>
-            <Table.Th>Почта</Table.Th>
-            <Table.Th>Информация</Table.Th>
-            <Table.Th>Телефон</Table.Th>
+            {tableHeaders.map((h) => (
+              <Table.Th key={h}>{h}</Table.Th>
+            ))}
+
+            <Table.Th>Посмотреть</Table.Th>
             <Table.Th>Изменить</Table.Th>
             <Table.Th>Удалить</Table.Th>
           </Table.Tr>
@@ -55,3 +66,5 @@ export const RequestTable = () => {
     </Table.ScrollContainer>
   );
 };
+
+const tableHeaders = ["ФИО", "Почта", "Информация", "Телефон"];

@@ -1,6 +1,10 @@
 import { UpdateDataWord } from "@/api/data";
 import { FormContainer } from "@/components/forms/FormContainer";
-import { notificationErrors, notificationSuccess } from "@/utils/consts";
+import {
+  notificationErrors,
+  notificationSuccess,
+  queryClient,
+} from "@/utils/consts";
 import {
   showErrorNotification,
   showSuccessNotification,
@@ -18,6 +22,7 @@ export const UploadWordForm = ({ close }: { close: () => void }) => {
       if (file) await UpdateDataWord({ company_list: file });
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["dataTable"] });
       showSuccessNotification(notificationSuccess.file);
       close();
     },

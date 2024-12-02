@@ -1,5 +1,5 @@
 import { GetAllData } from "@/api/data";
-import { ErrorUI } from "@/components";
+import { ErrorUI, ShowContentModal } from "@/components";
 import { DeleteDataButton } from "@/components/DeleteDataButton";
 import { EditDataButton } from "@/components/EditDataButton";
 import { notificationErrors } from "@/utils/consts";
@@ -32,6 +32,17 @@ export const DataTable = () => {
       </Table.Td>
       <Table.Td>{element.telephone}</Table.Td>
       <Table.Td>
+        <ShowContentModal
+          value={{
+            [tableHeaders[0]]: element.bin,
+            [tableHeaders[1]]: element.status,
+            [tableHeaders[2]]: element.data,
+            [tableHeaders[3]]: element.telephone,
+          }}
+        />
+      </Table.Td>
+
+      <Table.Td>
         <EditDataButton data={element} />
       </Table.Td>
       <Table.Td>
@@ -45,10 +56,10 @@ export const DataTable = () => {
       <Table>
         <Table.Thead>
           <Table.Tr>
-            <Table.Th>БИН</Table.Th>
-            <Table.Th>Статус</Table.Th>
-            <Table.Th>Информация</Table.Th>
-            <Table.Th>Телефон</Table.Th>
+            {tableHeaders.map((h) => (
+              <Table.Th key={h}>{h}</Table.Th>
+            ))}
+            <Table.Th>Посмотреть</Table.Th>
             <Table.Th>Изменить</Table.Th>
             <Table.Th>Удалить</Table.Th>
           </Table.Tr>
@@ -58,3 +69,5 @@ export const DataTable = () => {
     </Table.ScrollContainer>
   );
 };
+
+const tableHeaders = ["БИН", "Статус", "Информация", "Телефон"];
