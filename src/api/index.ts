@@ -1,6 +1,9 @@
 import { getCookie } from "../utils/cookies";
-
-const backendUrl = import.meta.env.VITE_BACKENDURL;
+const mode = import.meta.env.VITE_MODE;
+const backendUrl =
+  mode == "DEV"
+    ? import.meta.env.VITE_DEV_BACKENDURL
+    : import.meta.env.VITE_BACKENDURL;
 
 interface CRequest {
   path: string;

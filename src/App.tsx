@@ -5,7 +5,7 @@ import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { Notifications } from "@mantine/notifications";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import { theme } from "./theme";
 export default function App() {
   return (
@@ -14,6 +14,7 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <Routes>
           <Route element={<BaseLayout />}>
+            <Route element={<Navigate to={"/login"} replace />} path="/" />
             <Route element={<PublicRoutes />}>
               <Route path="login" element={<LoginPage />} />
             </Route>
