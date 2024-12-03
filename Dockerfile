@@ -22,4 +22,4 @@ RUN echo "Building project..." && \
 EXPOSE 4173
 
 # Запускаем приложение
-CMD ["yarn", "preview"]
+CMD ["yarn", "preview", "--host"]
