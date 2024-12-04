@@ -14,7 +14,7 @@ interface CRequest {
 }
 export const customFetch = async (
   params: CRequest,
-  withPrefix: boolean = true,
+  withPrefix: boolean = true
 ) => {
   const url = new URL(`${withPrefix ? "/api/" : ""}${params.path}`, backendUrl);
 

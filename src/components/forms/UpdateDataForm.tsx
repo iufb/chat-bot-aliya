@@ -1,24 +1,26 @@
-import { errorsConstants } from "@/components/forms";
-import { DataDTO, DataType } from "@/utils/types";
-import { Button, InputBase, Textarea, TextInput, Title } from "@mantine/core";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { IMaskInput } from "react-imask";
-import { FormContainer } from "./FormContainer";
-import { useMutation } from "@tanstack/react-query";
 import { UpdateData } from "@/api/data";
-import {
-  showErrorNotification,
-  showSuccessNotification,
-} from "@/utils/notifications";
+import { errorsConstants } from "@/components/forms";
 import {
   notificationErrors,
   notificationSuccess,
   queryClient,
 } from "@/utils/consts";
+import {
+  showErrorNotification,
+  showSuccessNotification,
+} from "@/utils/notifications";
+import { DataDTO, DataType } from "@/utils/types";
+import { Button, InputBase, Textarea, TextInput, Title } from "@mantine/core";
+import { useMutation } from "@tanstack/react-query";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { IMaskInput } from "react-imask";
+import { FormContainer } from "./FormContainer";
 interface UpdateDataFormProps {
   data: DataDTO;
 }
 export const UpdateDataForm = ({ data }: UpdateDataFormProps) => {
+  console.log(data);
+
   const { mutate: UpdateDataMutation, isPending } = useMutation({
     mutationKey: ["updateData"],
     mutationFn: UpdateData,
@@ -37,7 +39,7 @@ export const UpdateDataForm = ({ data }: UpdateDataFormProps) => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<DataType>({ defaultValues: data });
+  } = useForm<DataType>({ defaultValues: { ...data, bin: data.bin.trim() } });
   const onSubmit: SubmitHandler<DataType> = (data) => {
     console.log(data);
     UpdateDataMutation({

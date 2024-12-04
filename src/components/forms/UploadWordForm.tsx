@@ -13,9 +13,12 @@ import { Button, FileInput, rem, Title } from "@mantine/core";
 import { useMutation } from "@tanstack/react-query";
 import { File } from "lucide-react";
 import { useState } from "react";
-
+import { Error } from "../Error";
+const type =
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 export const UploadWordForm = ({ close }: { close: () => void }) => {
   const [file, setFile] = useState<File | null>();
+  const [error, setError] = useState("");
   const { mutate: uploadFile, isPending } = useMutation({
     mutationKey: ["uploadWord"],
     mutationFn: async () => {
@@ -33,7 +36,13 @@ export const UploadWordForm = ({ close }: { close: () => void }) => {
   return (
     <form
       onSubmit={(e) => {
+        setError("");
         e.preventDefault();
+        if (file && file.type !== type) {
+          setError("Необходимо прикрепить .docx файл.");
+          return;
+        }
+
         uploadFile();
       }}
     >
@@ -50,8 +59,9 @@ export const UploadWordForm = ({ close }: { close: () => void }) => {
           label="Информация о компании (Word)"
           placeholder="Файл"
           leftSectionPointerEvents="none"
-          accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          accept=".docx"
         />
+        <Error>{error}</Error>
         <Button
           type="submit"
           loading={isPending}

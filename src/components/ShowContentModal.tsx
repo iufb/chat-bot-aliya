@@ -1,4 +1,4 @@
-import { Button, Flex, Modal, Text, Title } from "@mantine/core";
+import { Box, Button, Flex, Modal, Text, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Eye } from "lucide-react";
 
@@ -8,6 +8,7 @@ export const ShowContentModal = ({
   value: Record<string, string>;
 }) => {
   const [opened, { open, close }] = useDisclosure(false);
+  console.log(value["Информация"].trim().split("\n").join("<br />"));
 
   return (
     <>
@@ -16,15 +17,23 @@ export const ShowContentModal = ({
           {Object.keys(value).map((key, idx) => (
             <Flex key={idx} gap={10} direction="column">
               <Title order={3}>{key}</Title>
-              <Text
+              <Box
                 bg={"slate.2"}
                 p={15}
                 style={{
                   borderRadius: 5,
                 }}
               >
-                {value[key]}
-              </Text>
+                {key == "Информация" ? (
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: value[key].trim().split("\n").join("<br/>"),
+                    }}
+                  />
+                ) : (
+                  <Text>{value[key]}</Text>
+                )}
+              </Box>
             </Flex>
           ))}
         </Flex>
