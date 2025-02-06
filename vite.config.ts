@@ -29,6 +29,9 @@ export default defineConfig({
         secure: false,
       },
     },
-    cors: false,
+    cors: true,
+    allowedHosts: [
+      "gptadminforgptbottosellandbuybusinesses.foxminded.space",
+    ],
   },
 });
